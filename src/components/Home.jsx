@@ -1,5 +1,5 @@
-// import Header from './Header/Header.js'
-// import Main from './Main';
+import Header from './Header/Header.jsx'
+import Main from './Main';
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -97,7 +97,7 @@ function Home() {
 
   return (
     <div className="text-gray-400 bg-gray-900 body-font">
-      {/* <Header
+      <Header
         item={item}
         setItem={setItem}
         items={items}
@@ -107,10 +107,10 @@ function Home() {
         cartItems={cartItems}
         onAdd={onAdd}
         onRemove={onRemove}
-      ></Header> */}
+      ></Header>
       <section className="text-gray-400 bg-gray-900 body-font">
         <div className="container px-5 py-24 mx-auto">
-          {/* <Main
+          <Main
             item={item}
             setItem={setItem}
             items={items}
@@ -121,7 +121,7 @@ function Home() {
             onAdd={onAdd}
             term={searchTerm}
             searchKeyword={searchHandler}
-          ></Main> */}
+          ></Main>
           <br></br>
           <br></br>
           <hr></hr>

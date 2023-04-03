@@ -1,7 +1,6 @@
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
-import { Double } from "bson";
 
 
 const app = express()
@@ -24,15 +23,8 @@ const itemSchema = mongoose.Schema({
 },{ timestamps: false })
 const Item = mongoose.model('Item',itemSchema);
 
-// const cartitemSchema = mongoose.Schema({
-    
-//     cartItems: { type : Array , "default" : [] }
-
-// },{ timestamps: false })
-// const cartItem = mongoose.model('cartItem',cartitemSchema);
 
 app.get("/items", async(req,res)=>{
-    // console.log('get items')
     try {
         const item =await Item.find()
        
@@ -45,27 +37,15 @@ app.get("/items", async(req,res)=>{
 
 
 app.post("/items", async(req,res)=>{
-    // console.log('createitem',req.body)
     const item = new Item(req.body);
     try {
+        console.log(item)
         await item.save();
         res.status(201).json(item);
     } catch (error) {
         
     }
 })
-
-// app.post("/saveCart", async(req,res)=>{
-//     console.log(req.body[0].price)
-//     const cartitem = new cartItem(req.body);
-//     try {
-//         await cartitem.save();
-//         res.status(201).json(cartitem);
-//     } catch (error) {
-        
-//     }
-// })
-
 
 app.post("/login", (req, res)=> {
     const { email, password} = req.body
