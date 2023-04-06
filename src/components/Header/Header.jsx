@@ -31,42 +31,46 @@ export default function Header(props) {
             user && user._id ? <a className="mr-5 hover:text-white">Help</a> : <a></a>
           }
         </nav>
+
         <Router>
           <div className="flex justify-between">
-            <Popup
-              trigger={<button className="mybutton"> Cart </button>}
-              modal
-              nested
-            >
-              {close => (
-                <div className="modal">
-                  <button className="close" onClick={close}>
-                    &times;
-                  </button>
-                  <div className="header"> Cart </div>
-                  <div className="content">
-                    {' '}
-                    <Basket
-                      cartItems={cartItems}
-                      onAdd={onAdd}
-                      onRemove={onRemove}
-                      reRender = {reRender}
-                    ></Basket>
-                  </div>
-                  <div className="actions">
-
-                    <button
-                      className="mybutton"
-                      onClick={() => {
-                        close();
-                      }}
-                    >
-                      Close
+            { user && user._id ?
+              <Popup
+                trigger={<button className="mybutton"> Cart </button>}
+                modal
+                nested
+              >
+                {close => (
+                  <div className="modal">
+                    <button className="close" onClick={close}>
+                      &times;
                     </button>
+                    <div className="header"> Cart </div>
+                    <div className="content">
+                      {' '}
+                      <Basket
+                        cartItems={cartItems}
+                        onAdd={onAdd}
+                        onRemove={onRemove}
+                        reRender={reRender}
+                      ></Basket>
+                    </div>
+                    <div className="actions">
+
+                      <button
+                        className="mybutton"
+                        onClick={() => {
+                          close();
+                        }}
+                      >
+                        Close
+                      </button>
+                    </div>
                   </div>
-                </div>
-              )}
-            </Popup>
+                )}
+              </Popup>:
+              <div></div>
+            }
             {
               user && user._id ?
                 <Popup

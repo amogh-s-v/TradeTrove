@@ -14,28 +14,25 @@ function App() {
 
   return (
     <BrowserRouter>
-        {
-            <Router>
-            <div>
-        
-                    {user?
-                    <Switch>
-                    <Route path = '/' exact component={Home} />
-                    {/* <Route path = '/pending' exact component={PendingTransactions}/> */}
-                    <Route path = '/checkout' exact component={checkout}/>
-                    </Switch>
-                    :
-                    <Switch>
-                    <Route path = '/' exact component={Home} />
-                    <Redirect to = '/' exact component = { Home } />
-                    </Switch>
-                    }
-                
-            </div>
-            
-        </Router>
-        }
-        </BrowserRouter>
+      {
+        <div>
+
+          {user ?
+            <Switch>
+              <Route path='/' exact component={Home} />
+              {/* <Route path = '/pending' exact component={PendingTransactions}/> */}
+              <Route path='/checkout' exact component={checkout} />
+            </Switch>
+            :
+            <Switch>
+              <Route path='/' exact component={Home} />
+              <Redirect to='/' exact component={Home} />
+            </Switch>
+          }
+
+        </div>
+      }
+    </BrowserRouter>
   );
 }
 export default App;

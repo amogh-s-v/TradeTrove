@@ -36,8 +36,9 @@ export default function Basket(props) {
   const history = useHistory();
     
   const redirectMe = (url) => {
-    window.location.replace(url)
-      
+    history.push(url)
+    window.location.reload();
+
   }
 
   return (
