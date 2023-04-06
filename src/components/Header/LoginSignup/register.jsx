@@ -42,11 +42,11 @@ const Register = () => {
 
             {console.log("User", user)}
             <label htmlFor="chk" aria-hidden="true">Sign up</label>
-            <div class="relative rounded-md shadow-sm space-y-2 flex flex-col items-center">
-                <input type="text" name="name" value={user.name} placeholder="Your Name" onChange={handleChange} class="block w-64 px-3 py-2 text-gray-700 placeholder-gray-400 bg-gray-100 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
-                <input type="text" name="email" value={user.email} placeholder="Your Email" onChange={handleChange} class="block w-64 px-3 py-2 text-gray-700 placeholder-gray-400 bg-gray-100 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
-                <input type="password" name="password" value={user.password} placeholder="Your Password" onChange={handleChange} class="block w-64 px-3 py-2 text-gray-700 placeholder-gray-400 bg-gray-100 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
-                <input type="password" name="reEnterPassword" value={user.reEnterPassword} placeholder="Re-enter Password" onChange={handleChange} class="block w-64 px-3 py-2 text-gray-700 placeholder-gray-400 bg-gray-100 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+            <div className="relative rounded-md shadow-sm space-y-2 flex flex-col items-center">
+                <input type="text" name="name" value={user.name} placeholder="Your Name" onChange={handleChange} className="block w-64 px-3 py-2 text-gray-700 placeholder-gray-400 bg-gray-100 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+                <input type="text" name="email" value={user.email} placeholder="Your Email" onChange={handleChange} className="block w-64 px-3 py-2 text-gray-700 placeholder-gray-400 bg-gray-100 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+                <input type="password" name="password" value={user.password} placeholder="Your Password" onChange={handleChange} className="block w-64 px-3 py-2 text-gray-700 placeholder-gray-400 bg-gray-100 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+                <input type="password" name="reEnterPassword" value={user.reEnterPassword} placeholder="Re-enter Password" onChange={handleChange} className="block w-64 px-3 py-2 text-gray-700 placeholder-gray-400 bg-gray-100 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
             </div>
             <button className="loginSignupButton" onClick={register} >Register</button>
 
