@@ -24,6 +24,11 @@ export default function checkout() {
     fetchData()
   }, [])
 
+  const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  const taxPrice = itemsPrice * 0.14;
+  const shippingPrice = itemsPrice > 2000 ? 0 : 70;
+  const totalPrice = itemsPrice + taxPrice + shippingPrice;
+
   return (
     <section className="text-gray-400 bg-gray-900 body-font">
       <h1 className="sr-only">Checkout</h1>
@@ -32,9 +37,6 @@ export default function checkout() {
         <div className="text-gray-400 bg-gray-900 body-font">
           <div className="mx-auto max-w-lg space-y-8 px-4 lg:px-8">
             <div>
-              <p className="text-2xl font-medium tracking-tight text-gray-900">
-                $99.99
-              </p>
               <p className="mt-1 text-xl">For the purchase of</p>
             </div>
             <div>
@@ -60,14 +62,40 @@ export default function checkout() {
                             <dt className="inline text-base text-slate-50">Quantity: </dt>
                             <dd className="inline text-base text-slate-50">{item.qty}</dd>
                           </div>
+                          <div>
+                            <dt className="inline text-base text-slate-50">Total Price: </dt>
+                            <dd className="inline text-base text-slate-50">₹{item.qty*item.price.toFixed(2)}</dd>
+                          </div>
                         </dl>
                       </div>
+
                     </li>
                   ))}
                 </ul>
+
               </div>
+              <div class="mt-6 border-t border-b py-2">
+                <div class="flex items-center justify-between">
+                  <p class="text-base font-medium text-slate-50">Subtotal</p>
+                  <p class="font-semibold text-slate-50">₹{itemsPrice.toFixed(2)}</p>
+                </div>
+                <div class="flex items-center justify-between">
+                  <p class="text-base font-medium text-slate-50">Tax</p>
+                  <p class="font-semibold text-slate-50">₹{taxPrice.toFixed(2)}</p>
+                </div>
+                <div class="flex items-center justify-between">
+                  <p class="text-base font-medium text-slate-50">Shipping Price</p>
+                  <p class="font-semibold text-slate-50">₹{shippingPrice.toFixed(2)}</p>
+                </div>
+              </div>
+              <div class="mt-6 flex items-center justify-between">
+                <p class="text-2xl font-medium text-slate-50">Total</p>
+                <p class="text-2xl font-semibold text-slate-50">₹{totalPrice.toFixed(2)}</p>
+              </div>
+              <br></br>
             </div>
           </div>
+
         </div>
 
         <div className="text-gray-400 bg-gray-900 body-font border-l border-white">
