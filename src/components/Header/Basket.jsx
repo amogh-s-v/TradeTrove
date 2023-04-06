@@ -1,27 +1,47 @@
 import React from 'react';
 import './BasketStyle.css'
+import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function Basket(props) {
 
-  const { cartItems, onAdd, onRemove } = props;
+  const { onAdd, onRemove, reRender } = props;
+
+  const [cartItems, setCartItems] = useState([]);
+
+  const getCartItems = async () => {
+    try {
+      const { data } = await axios.get("http://localhost:9002/cart")
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getCartItems();
+      console.log("fetched")
+      setCartItems(result)
+    }
+    fetchData()
+  }, [reRender])
   
   const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
   const taxPrice = itemsPrice * 0.14;
   const shippingPrice = itemsPrice > 2000 ? 0 : 70;
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
 
-  // const [ saveItems, setSaveItems ] = useState([]);
-  // const onSubmitHandler = async (e) => {
-  //   e.preventDefault();
-
-  //   const result = await setSaveItems(saveItems);
-  //   setItems(items=> [...items, result]);
-  // }
-
+  const history = useHistory();
+    
+  const redirectMe = (url) => {
+    window.location.replace(url)
+      
+  }
 
   return (
-
-    const 
+    
     <aside className="blockCart col-1">
       <h2 className="h2">Cart Items</h2>
       <br></br>
@@ -39,7 +59,7 @@ export default function Basket(props) {
                 +
               </button>
             </div>
-
+            <div className="col-2">{item.qty}</div>
             <div className="col-2 text-right">
               {/* {item.qty} x ₹{item.price.toFixed(2)} */}
               ₹{item.qty*item.price.toFixed(2)}            
@@ -78,7 +98,7 @@ export default function Basket(props) {
             </div>
             <hr />
             <div className="buttonRow">
-              <button onClick={() => alert('need to implement this')} className="checkoutButton">
+              <button onClick={() => redirectMe('/checkout')} className="checkoutButton">
                 Checkout
               </button>
             </div>

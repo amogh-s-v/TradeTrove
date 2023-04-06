@@ -4,22 +4,43 @@ import Main from './Main';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-
 function Home() {
 
-  const products = [];
   const [item, setItem] = useState({ title: '', image: '', price: 0 });
   const [items, setItems] = useState([])
   const [cartItems, setCartItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("")
   const [searchResults, setSearchResults] = useState([]);
 
+  const [reRender, setreRender] = useState(false);
+
   const [user, setLoginUser] = useState({})
+
+  const url = "http://localhost:9002/items";
+
+  const urlItems = "http://localhost:9002/cart";
 
   var s = {
     height : "1cm",
     width : "3cm"
   }
+
+  const getCartItems = async () => {
+    try {
+      const { data } = await axios.get("http://localhost:9002/cart")
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getCartItems();
+      console.log('fetch data', result)
+      setCartItems(result)
+    }
+    fetchData()
+  }, [])
 
   useEffect(() => {
     setLoginUser(JSON.parse(localStorage.getItem("MyUser")))
@@ -30,32 +51,14 @@ function Home() {
     setLoginUser(user)
   }
 
-  const onAdd = (product) => {
-    const exist = cartItems.find((x) => x._id === product._id);
-    if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x._id === product._id ? { ...exist, qty: exist.qty + 1 } : x
-
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
-    }
+  const onAdd = async(product) => {
+    await axios.post("http://localhost:9002/addtocart" , { product });
+    setreRender(!reRender)
   };
 
-  const onRemove = (product) => {
-
-    const exist = cartItems.find((x) => x._id === product._id);
-    if (exist.qty === 1) {
-      setCartItems(cartItems.filter((x) => x._id !== product._id));
-    } else {
-      setCartItems(
-        cartItems.map((x) =>
-          x._id === product._id ? { ...exist, qty: exist.qty - 1 } : x
-        )
-      );
-    }
+  const onRemove = async (product) => {
+    await axios.post("http://localhost:9002/removefromcart", {product});
+    setreRender(!reRender)
   };
 
   const searchHandler = (searchTerm) => {
@@ -73,7 +76,7 @@ function Home() {
     }
   };
 
-  const url = "http://localhost:9002/items";
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -107,6 +110,7 @@ function Home() {
         cartItems={cartItems}
         onAdd={onAdd}
         onRemove={onRemove}
+        reRender = {reRender}
       ></Header>
       <section className="text-gray-400 bg-gray-900 body-font">
         <div className="container px-5 py-24 mx-auto">

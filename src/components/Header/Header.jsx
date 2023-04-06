@@ -8,7 +8,7 @@ import './popupExtra.css'
 import Upload from './Upload.jsx';
 
 export default function Header(props) {
-  const { cartItems, onAdd, onRemove, user, updateUser, item, setItem, items, setItems } = props;
+  const { cartItems, onAdd, onRemove, user, updateUser, item, setItem, items, setItems, reRender } = props;
   var s = {
     height: "2cm",
     width: "5cm"
@@ -50,6 +50,7 @@ export default function Header(props) {
                       cartItems={cartItems}
                       onAdd={onAdd}
                       onRemove={onRemove}
+                      reRender = {reRender}
                     ></Basket>
                   </div>
                   <div className="actions">
