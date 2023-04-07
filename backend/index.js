@@ -120,7 +120,7 @@ app.get('/cart', async(req, res)=>{
 
 
 app.get('/getIMG', function (req, res) {
-    res.sendFile('D:/Amogh/foodImages/delivery_app.png');
+    res.sendFile('E:/Amogh/PES/Semester-VI/CC/Project/TradeTrove/delivery_app.png');
 })
 app.post("/register", (req, res) => {
     const { name, email, password } = req.body
