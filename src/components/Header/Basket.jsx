@@ -27,14 +27,14 @@ export default function Basket(props) {
     }
     fetchData()
   }, [reRender])
-  
+
   const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
   const taxPrice = itemsPrice * 0.14;
   const shippingPrice = itemsPrice > 2000 ? 0 : 70;
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
 
   const history = useHistory();
-    
+
   const redirectMe = (url) => {
     history.push(url)
     window.location.reload();
@@ -42,17 +42,17 @@ export default function Basket(props) {
   }
 
   return (
-    
+
     <aside className="blockCart col-1">
       <h2 className="h2">Cart Items</h2>
       <br></br>
-      
+
       <div>
         {cartItems.length === 0 && <div>Cart is empty</div>}
         {cartItems.map((item) => (
           <div key={item._id} className="row">
-            <div className="col-2">{item.title}</div>
-            <div className="col-2">
+            <div className="col-2 inline text-base text-slate-50 text-sky-400">{item.title}</div>
+            <div className="col-2 text-base text-slate-50 text-sky-400">
               <button onClick={() => onRemove(item)} className="remove">
                 -
               </button>{' '}
@@ -60,46 +60,39 @@ export default function Basket(props) {
                 +
               </button>
             </div>
-            <div className="col-2">{item.qty}</div>
-            <div className="col-2 text-right">
-              {/* {item.qty} x ₹{item.price.toFixed(2)} */}
-              ₹{item.qty*item.price.toFixed(2)}            
+            <div className="col-2 inline text-base text-slate-50 text-rose-500" >{item.qty}</div>
+            <div className="col-2 text-right inline text-base text-slate-50 text-green-300">
+              ₹{item.qty * item.price.toFixed(2)}
             </div>
           </div>
         ))}
+
+        <br></br>
 
         {cartItems.length !== 0 && (
           <>
             <hr></hr>
             <br></br>
             <div className="row">
-              <div className="col-2">Items Price</div>
-              <div className="col-1 text-right">₹{itemsPrice.toFixed(2)}</div>
+              <div className="col-2 inline text-base text-slate-50 text-sky-400">Items Price</div>
+              <div className="col-1 text-right inline text-base text-slate-50 text-green-300">₹{itemsPrice.toFixed(2)}</div>
             </div>
-            <div className="row">
-              <div className="col-2">Tax Price</div>
-              <div className="col-1 text-right">₹{taxPrice.toFixed(2)}</div>
-            </div>
-            <div className="row">
-              <div className="col-2">Shipping Price</div>
-              <div className="col-1 text-right">
-              ₹{shippingPrice.toFixed(2)}
-              </div>
-            </div>
-            
             <br></br>
             <hr></hr>
             <div className="row">
               <div className="col-2">
-              <h2 className="h2">Total Price</h2>
+                <br></br>
+                <h2 className="h2 inline text-base text-slate-50 text-sky-400">Total Price</h2>
               </div>
               <div className="col-1 text-right">
-              <h2 className="h2">₹{totalPrice.toFixed(2)}</h2>
+                <br></br>
+                <h2 className="h2 text-rose-500">₹{totalPrice.toFixed(2)}</h2>
               </div>
             </div>
+            <br></br>
             <hr />
             <div className="buttonRow">
-              <button onClick={() => redirectMe('/checkout')} className="checkoutButton">
+              <button onClick={() => redirectMe('/checkout')} className="bg-blue-500 hover:bg-rose-500 text-base text-white font-bold py-2 px-4 rounded">
                 Checkout
               </button>
             </div>

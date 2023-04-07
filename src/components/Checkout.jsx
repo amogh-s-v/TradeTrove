@@ -55,18 +55,15 @@ export default function checkout() {
 
                         <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
                           <div>
-                            <dt className="inline text-base text-slate-50">Price: </dt>
-                            <dd className="inline text-base text-slate-50">{item.price}</dd>
+                            <br></br>
+                            <dt className="inline text-base text-slate-50 text-sky-400">₹{item.price}</dt>
+                            <dd className="inline text-base text-slate-50"> x </dd>
+                            <dd className="inline text-base text-slate-50 text-rose-500">{item.qty}</dd>
+                            <dd className="inline text-base text-slate-50"> = </dd>
+                            <dd className="inline text-base text-slate-50 text-green-300">₹{item.qty * item.price.toFixed(2)}</dd>
                           </div>
                           <div>
-                            <dt className="inline text-base text-slate-50">Quantity: </dt>
-                            <dd className="inline text-base text-slate-50">{item.qty}</dd>
-                          </div>
-                          <div>
-                            <dt className="inline text-base text-slate-50">Total Price: </dt>
-                            <dd className="inline text-base text-slate-50">₹{item.qty*item.price.toFixed(2)}</dd>
-                          </div>
-                          <div>
+                            <br></br>
                             <dt className="inline text-base text-slate-50">Seller: </dt>
                             <dd className="inline text-base text-slate-50">{item.uploader}</dd>
                           </div>
@@ -93,8 +90,8 @@ export default function checkout() {
                 </div>
               </div>
               <div class="mt-6 flex items-center justify-between">
-                <p class="text-2xl font-medium text-slate-50">Total</p>
-                <p class="text-2xl font-semibold text-slate-50">₹{totalPrice.toFixed(2)}</p>
+                <p class="text-2xl font-medium text-slate-50 text-rose-500">Total</p>
+                <p class="text-2xl font-semibold text-slate-50 text-green-300">₹{totalPrice.toFixed(2)}</p>
               </div>
               <br></br>
             </div>
@@ -104,22 +101,37 @@ export default function checkout() {
 
         <div className="text-gray-400 bg-gray-900 body-font border-l border-white">
           <div className="mx-auto max-w-lg px-4 lg:px-8">
-            <form className="grid grid-cols-6 gap-4">
+            <form className="">
               <div className="col-span-3">
-                <label for="FirstName" className="block text-base text-slate-50">First Name</label>
+                <label for="FirstName" className="block text-base text-slate-50">Your Addresses </label>
                 <input type="text" id="FirstName" className="w-full rounded-md shadow-sm sm:text-sm" />
-              </div>
-              <div className="col-span-3">
-                <label for="LastName" className="block text-base text-slate-50">Last Name</label>
-                <input type="text" id="LastName" className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm" />
+                <br></br>
+                <div>
+                  <label for="Country" className="sr-only">Country</label>
+                  <select id="Country" className="relative w-full rounded-t-md border-gray-200 focus:z-10 sm:text-sm">
+                    <option>England</option>
+                    <option>Wales</option>
+                    <option>Scotland</option>
+                    <option>France</option>
+                    <option>Belgium</option>
+                    <option>Japan</option>
+                  </select>
+                </div>
+                <br></br>
+                <div>
+                  <label className="sr-only" for="PostalCode"> ZIP/Post Code </label>
+
+                  <input
+                    type="text"
+                    id="PostalCode"
+                    placeholder="ZIP/Post Code"
+                    className="relative w-full rounded-b-md border-gray-200 focus:z-10 sm:text-sm"
+                  />
+                </div>
               </div>
               <div className="col-span-6">
-                <label for="Email" className="block text-base text-slate-50">Email</label>
+                <label for="Email" className="block text-base text-slate-50">Contact Number</label>
                 <input type="email" id="Email" className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm" />
-              </div>
-              <div className="col-span-6">
-                <label for="Phone" className="block text-base text-slate-50">Phone</label>
-                <input type="tel" id="Phone" className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm" />
               </div>
               <fieldset className="col-span-6">
                 <legend className="block text-sm font-medium text-gray-700">Card Details</legend>
@@ -140,39 +152,12 @@ export default function checkout() {
                   </div>
                 </div>
               </fieldset>
-              <fieldset className="col-span-6">
-                <legend className="block text-sm font-medium text-gray-700">Billing Address</legend>
-                <div className="mt-1 -space-y-px rounded-md bg-white shadow-sm">
-                  <div>
-                    <label for="Country" className="sr-only">Country</label>
-                    <select id="Country" className="relative w-full rounded-t-md border-gray-200 focus:z-10 sm:text-sm">
-                      <option>England</option>
-                      <option>Wales</option>
-                      <option>Scotland</option>
-                      <option>France</option>
-                      <option>Belgium</option>
-                      <option>Japan</option>
-                    </select>
-                  </div>
 
-                  <div>
-                    <label className="sr-only" for="PostalCode"> ZIP/Post Code </label>
-
-                    <input
-                      type="text"
-                      id="PostalCode"
-                      placeholder="ZIP/Post Code"
-                      className="relative w-full rounded-b-md border-gray-200 focus:z-10 sm:text-sm"
-                    />
-                  </div>
-                </div>
-              </fieldset>
+              <br></br>
 
               <div className="col-span-6">
-                <button
-                  className="block w-full rounded-md bg-black p-2.5 text-sm text-white transition hover:shadow-lg"
-                >
-                  Pay Now
+                <button className="block w-full rounded-md bg-rose-600 p-2.5 text-base text-white transition duration-300 ease-in-out hover:bg-green-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                  Pay ₹{totalPrice.toFixed(2)}
                 </button>
               </div>
             </form>
