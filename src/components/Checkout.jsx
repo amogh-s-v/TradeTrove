@@ -66,6 +66,10 @@ export default function checkout() {
                             <dt className="inline text-base text-slate-50">Total Price: </dt>
                             <dd className="inline text-base text-slate-50">₹{item.qty*item.price.toFixed(2)}</dd>
                           </div>
+                          <div>
+                            <dt className="inline text-base text-slate-50">Seller: </dt>
+                            <dd className="inline text-base text-slate-50">{item.uploader}</dd>
+                          </div>
                         </dl>
                       </div>
 

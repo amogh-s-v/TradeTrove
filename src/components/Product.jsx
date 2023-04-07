@@ -39,7 +39,7 @@ const showSidebar = () => setSidebar(!sidebar);
               alert('Please Login!')
             }
             }}>
-          <span data-title="YES!">ㅤADD TO CART?ㅤ</span>
+          <span data-title="YES!">ADD TO CART?</span>
           </button>
         </div>
     </div>

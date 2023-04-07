@@ -21,14 +21,16 @@ const cartItemSchema = new mongoose.Schema({
     title: { type: String, required: true },
     image: { type: String, required: true },
     price: { type: Number, required: true },
-    qty: { type: Number, default: 1 }
+    qty: { type: Number, default: 1 }, 
+    uploader: {type: String}
 });
 const CartItem = mongoose.model('CartItem', cartItemSchema);
 
 const itemSchema = mongoose.Schema({
     title: String,
     image: String,
-    price: Number
+    price: Number, 
+    uploader: String
 }, { timestamps: false })
 const Item = mongoose.model('Item', itemSchema);
 
@@ -148,7 +150,7 @@ app.get('/contact', function (req, res) {
 })
 
 
-const mongodb = "mongodb://localhost:27017/webtechProject";
+const mongodb = "mongodb://localhost:27017/TradeTrove";
 const PORT = process.env.PORT || 9002;
 mongoose.connect(mongodb, {
     useNewUrlParser: true,

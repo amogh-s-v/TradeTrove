@@ -36,7 +36,6 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await getCartItems();
-      console.log('fetch data', result)
       setCartItems(result)
     }
     fetchData()
@@ -81,7 +80,6 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await getItems();
-      console.log('fetch data', result)
       setItems(result)
     }
     fetchData()

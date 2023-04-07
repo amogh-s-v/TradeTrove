@@ -1,13 +1,27 @@
 import './BasketStyle.css'
 import FileBase64 from 'react-file-base64';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+
 function Upload(props) {
 
   const { item, setItem, items, setItems } = props;
+
+  const [user, setLoginUser] = useState({})
+
+  useEffect(() => {
+    setLoginUser(JSON.parse(localStorage.getItem("MyUser")))
+  }, [])
+
+  useEffect(() => {
+    setItem({ ...item, uploader: user.name });
+  }, [user]);
+
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const result = await createItem(item);
-
     setItems(items => [...items, result]);
   }
 
@@ -46,6 +60,14 @@ function Upload(props) {
           className="w-full py-2 px-3 rounded-lg border-2 border-gray-300 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500 mx-auto"
         />
 
+        <input
+          type="text"
+          placeholder={user.name}
+          readOnly
+          className="w-full rounded-md border-gray-300 shadow-sm px-4 py-2 bg-gray-100 text-gray-700 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm mb-4 mx-auto max-w-sm"
+        />
+        
+        
 
         <div className="right-align mt-4">
           <div className="buttonRow">

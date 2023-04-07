@@ -91,6 +91,7 @@ export default function Header(props) {
                           setItem={setItem}
                           items={items}
                           setItems={setItems}
+                          user = {user}
                         />
                       </div>
                       <div className="actions">
