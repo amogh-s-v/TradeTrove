@@ -51,8 +51,8 @@ export default function Basket(props) {
         {cartItems.length === 0 && <div>Cart is empty</div>}
         {cartItems.map((item) => (
           <div key={item._id} className="row">
-            <div className="col-2 inline text-base text-slate-50 text-sky-400">{item.title}</div>
-            <div className="col-2 text-base text-slate-50 text-sky-400">
+            <div className="col-2 inline text-base text-violet-500">{item.title}</div>
+            <div className="col-2 text-base text-sky-400">
               <button onClick={() => onRemove(item)} className="remove">
                 -
               </button>{' '}
@@ -60,8 +60,8 @@ export default function Basket(props) {
                 +
               </button>
             </div>
-            <div className="col-2 inline text-base text-slate-50 text-rose-500" >{item.qty}</div>
-            <div className="col-2 text-right inline text-base text-slate-50 text-green-300">
+            <div className="col-2 inline text-base text-rose-300" >{item.qty}</div>
+            <div className="col-2 text-right inline text-base text-green-300">
               ₹{item.qty * item.price.toFixed(2)}
             </div>
           </div>
@@ -74,25 +74,13 @@ export default function Basket(props) {
             <hr></hr>
             <br></br>
             <div className="row">
-              <div className="col-2 inline text-base text-slate-50 text-sky-400">Items Price</div>
-              <div className="col-1 text-right inline text-base text-slate-50 text-green-300">₹{itemsPrice.toFixed(2)}</div>
-            </div>
-            <br></br>
-            <hr></hr>
-            <div className="row">
-              <div className="col-2">
-                <br></br>
-                <h2 className="h2 inline text-base text-slate-50 text-sky-400">Total Price</h2>
-              </div>
-              <div className="col-1 text-right">
-                <br></br>
-                <h2 className="h2 text-rose-500">₹{totalPrice.toFixed(2)}</h2>
-              </div>
+              <div className="col-2 inline text-base text-red-500">Items Price</div>
+              <div className="col-1 text-right inline text-base text-red-500">₹{itemsPrice.toFixed(2)}</div>
             </div>
             <br></br>
             <hr />
             <div className="buttonRow">
-              <button onClick={() => redirectMe('/checkout')} className="bg-blue-500 hover:bg-rose-500 text-base text-white font-bold py-2 px-4 rounded">
+              <button onClick={() => redirectMe('/checkout')} className="bg-blue-500 hover:bg-rose-500 text-base text-white py-2 px-4 rounded">
                 Checkout
               </button>
             </div>

@@ -56,16 +56,16 @@ export default function checkout() {
                         <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
                           <div>
                             <br></br>
-                            <dt className="inline text-base text-slate-50 text-sky-400">₹{item.price}</dt>
+                            <dt className="inline text-base text-sky-400">₹{item.price}</dt>
                             <dd className="inline text-base text-slate-50"> x </dd>
-                            <dd className="inline text-base text-slate-50 text-rose-500">{item.qty}</dd>
+                            <dd className="inline text-base text-rose-500">{item.qty}</dd>
                             <dd className="inline text-base text-slate-50"> = </dd>
-                            <dd className="inline text-base text-slate-50 text-green-300">₹{item.qty * item.price.toFixed(2)}</dd>
+                            <dd className="inline text-base text-green-300">₹{item.qty * item.price.toFixed(2)}</dd>
                           </div>
                           <div>
                             <br></br>
                             <dt className="inline text-base text-slate-50">Seller: </dt>
-                            <dd className="inline text-base text-slate-50">{item.uploader}</dd>
+                            <dd className="inline text-base text-pink-400">{item.uploader}</dd>
                           </div>
                         </dl>
                       </div>
@@ -90,8 +90,8 @@ export default function checkout() {
                 </div>
               </div>
               <div class="mt-6 flex items-center justify-between">
-                <p class="text-2xl font-medium text-slate-50 text-rose-500">Total</p>
-                <p class="text-2xl font-semibold text-slate-50 text-green-300">₹{totalPrice.toFixed(2)}</p>
+                <p class="text-2xl font-medium text-rose-500">Total</p>
+                <p class="text-2xl font-semibold text-green-300">₹{totalPrice.toFixed(2)}</p>
               </div>
               <br></br>
             </div>
