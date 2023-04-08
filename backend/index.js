@@ -34,6 +34,18 @@ const itemSchema = mongoose.Schema({
 }, { timestamps: false })
 const Item = mongoose.model('Item', itemSchema);
 
+const orderSchema = mongoose.Schema({
+    items: Array,
+    buyer: String,
+    address: String,
+    country: String,
+    pincode: String,
+    contact: String,
+    upi: String,
+    price: Number,
+})
+const Order = mongoose.model('Order', orderSchema);
+
 
 app.get("/items", async (req, res) => {
     try {
@@ -54,7 +66,6 @@ app.post("/items", async (req, res) => {
         await item.save();
         res.status(201).json(item);
     } catch (error) {
-
     }
 })
 
@@ -122,6 +133,17 @@ app.get('/cart', async(req, res)=>{
 app.get('/getIMG', function (req, res) {
     res.sendFile('E:/Amogh/PES/Semester-VI/CC/Project/TradeTrove/delivery_app.png');
 })
+
+app.post('/order', async (req, res) =>{
+    const orderdetails = new Order(req.body);
+    try {
+        await orderdetails.save();
+        // await CartItem.remove({_id: req.body.id})
+        res.status(201).json(orderdetails);
+    } catch (error) {
+    }
+})
+
 app.post("/register", (req, res) => {
     const { name, email, password } = req.body
     User.findOne({ email: email }, (err, user) => {

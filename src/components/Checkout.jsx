@@ -7,6 +7,64 @@ export default function checkout() {
 
   const [cartItems, setCartItems] = useState([]);
 
+  const [orderDetails, setOrderDetails] = useState({
+    items: [],
+    buyer: "",
+    address: "",
+    country: "",
+    pincode: "",
+    contact: "",
+    upi: "",
+    price: 0,
+  })
+
+  const [user, setLoginUser] = useState({})
+
+  useEffect(() => {
+    setLoginUser(JSON.parse(localStorage.getItem("MyUser")))
+  }, [])
+
+  useEffect(() => {
+    setOrderDetails({ ...orderDetails, buyer: user.name });
+  }, [user]);
+
+  useEffect(() => {
+    const updatedOrderDetails = {
+      ...orderDetails,
+      items: cartItems,
+    };
+    setOrderDetails(updatedOrderDetails);
+  }, [cartItems])
+
+  const handleChange = e => {
+    const { name, value } = e.target
+    setOrderDetails({
+      ...orderDetails,
+      [name]: value
+    })
+  }
+
+  const placeOrder = async (event) => {
+    event.preventDefault();
+    const updatedOrderDetails = {
+      ...orderDetails,
+      price: totalPrice.toFixed(2),
+    };
+    setOrderDetails(updatedOrderDetails);
+    const result = await purchase(orderDetails);
+  }
+
+  const url = "http://localhost:9002/order";
+
+  const purchase = async (order) => {
+    try {
+      const { data } = await axios.post(url, order);
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const getCartItems = async () => {
     try {
       const { data } = await axios.get("http://localhost:9002/cart")
@@ -75,23 +133,23 @@ export default function checkout() {
                 </ul>
 
               </div>
-              <div class="mt-6 border-t border-b py-2">
-                <div class="flex items-center justify-between">
-                  <p class="text-base font-medium text-slate-50">Subtotal</p>
-                  <p class="font-semibold text-slate-50">₹{itemsPrice.toFixed(2)}</p>
+              <div className="mt-6 border-t border-b py-2">
+                <div className="flex items-center justify-between">
+                  <p className="text-base font-medium text-slate-50">Subtotal</p>
+                  <p className="font-semibold text-slate-50">₹{itemsPrice.toFixed(2)}</p>
                 </div>
-                <div class="flex items-center justify-between">
-                  <p class="text-base font-medium text-slate-50">Tax</p>
-                  <p class="font-semibold text-slate-50">₹{taxPrice.toFixed(2)}</p>
+                <div className="flex items-center justify-between">
+                  <p className="text-base font-medium text-slate-50">Tax</p>
+                  <p className="font-semibold text-slate-50">₹{taxPrice.toFixed(2)}</p>
                 </div>
-                <div class="flex items-center justify-between">
-                  <p class="text-base font-medium text-slate-50">Shipping Price</p>
-                  <p class="font-semibold text-slate-50">₹{shippingPrice.toFixed(2)}</p>
+                <div className="flex items-center justify-between">
+                  <p className="text-base font-medium text-slate-50">Shipping Price</p>
+                  <p className="font-semibold text-slate-50">₹{shippingPrice.toFixed(2)}</p>
                 </div>
               </div>
-              <div class="mt-6 flex items-center justify-between">
-                <p class="text-2xl font-medium text-rose-500">Total</p>
-                <p class="text-2xl font-semibold text-green-300">₹{totalPrice.toFixed(2)}</p>
+              <div className="mt-6 flex items-center justify-between">
+                <p className="text-2xl font-medium text-rose-500">Total</p>
+                <p className="text-2xl font-semibold text-green-300">₹{totalPrice.toFixed(2)}</p>
               </div>
               <br></br>
             </div>
@@ -101,15 +159,16 @@ export default function checkout() {
 
         <div className="text-gray-400 bg-gray-900 body-font border-l border-white">
           <div className="mx-auto max-w-lg px-4 lg:px-8">
-            <form className="">
+            <form>
               <div className="col-span-3">
-                <label for="FirstName" className="block text-base text-slate-50">Your Addresses </label>
-                <input type="text" id="FirstName" className="w-full rounded-md shadow-sm sm:text-sm" />
+                <label htmlFor="FirstName" className="block text-base text-slate-50">Your Addresses </label>
+                <input type="text" id="FirstName" placeholder="Full Address" className="w-full rounded-md shadow-sm sm:text-sm" name="address" value={orderDetails.address} onChange={handleChange} />
                 <br></br>
                 <div>
-                  <label for="Country" className="sr-only">Country</label>
-                  <select id="Country" className="relative w-full rounded-t-md border-gray-200 focus:z-10 sm:text-sm">
-                    <option>England</option>
+                  <label htmlFor="Country" className="sr-only">Country</label>
+                  <select id="Country" className="relative w-full rounded-t-md border-gray-200 focus:z-10 sm:text-sm" name="country" value={orderDetails.country} onChange={handleChange}>
+                    <option>Select</option>
+                    <option>India</option>
                     <option>Wales</option>
                     <option>Scotland</option>
                     <option>France</option>
@@ -119,36 +178,27 @@ export default function checkout() {
                 </div>
                 <br></br>
                 <div>
-                  <label className="sr-only" for="PostalCode"> ZIP/Post Code </label>
+                  <label className="sr-only" htmlFor="PostalCode"> ZIP/Post Code </label>
 
                   <input
                     type="text"
                     id="PostalCode"
                     placeholder="ZIP/Post Code"
                     className="relative w-full rounded-b-md border-gray-200 focus:z-10 sm:text-sm"
+                    name="pincode"
+                    value={orderDetails.pincode} onChange={handleChange}
                   />
                 </div>
               </div>
               <div className="col-span-6">
-                <label for="Email" className="block text-base text-slate-50">Contact Number</label>
-                <input type="email" id="Email" className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm" />
+                <label htmlFor="Email" className="block text-base text-slate-50">Contact Number</label>
+                <input id="Email" placeholder="Phone Number" className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm" name="contact" value={orderDetails.contact} onChange={handleChange} />
               </div>
               <fieldset className="col-span-6">
-                <legend className="block text-sm font-medium text-gray-700">Card Details</legend>
-                <div className="mt-1 -space-y-px rounded-md bg-white shadow-sm">
+                <label className="block text-base text-slate-50">UPI ID</label>
+                <div className="mt-1 -space-y-px rounded-md bg-white shadow-sm" >
                   <div>
-                    <label for="CardNumber" className="sr-only"> Card Number </label>
-                    <input type="text" id="CardNumber" placeholder="Card Number" className="relative mt-1 w-full rounded-t-md border-gray-200 focus:z-10 sm:text-sm" />
-                  </div>
-                  <div className="flex -space-x-px">
-                    <div className="flex-1">
-                      <label for="CardExpiry" className="sr-only"> Card Expiry </label>
-                      <input type="text" id="CardExpiry" placeholder="Expiry Date" className="relative w-full rounded-bl-md border-gray-200 focus:z-10 sm:text-sm" />
-                    </div>
-                    <div className="flex-1">
-                      <label for="CardCVC" className="sr-only"> Card CVC </label>
-                      <input type="text" id="CardCVC" placeholder="CVC" className="relative w-full rounded-br-md border-gray-200 focus:z-10 sm:text-sm" />
-                    </div>
+                    <input type="text" id="CardNumber" placeholder="UPI ID" className="relative mt-1 w-full rounded-t-md border-gray-200 focus:z-10 sm:text-sm" name="upi" value={orderDetails.upi} onChange={handleChange} />
                   </div>
                 </div>
               </fieldset>
@@ -156,7 +206,7 @@ export default function checkout() {
               <br></br>
 
               <div className="col-span-6">
-                <button className="block w-full rounded-md bg-rose-600 p-2.5 text-base text-white transition duration-300 ease-in-out hover:bg-green-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+                <button onClick={placeOrder} className="block w-full rounded-md bg-rose-600 p-2.5 text-base text-white transition duration-300 ease-in-out hover:bg-green-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400">
                   Pay ₹{totalPrice.toFixed(2)}
                 </button>
               </div>

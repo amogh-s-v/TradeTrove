@@ -51,6 +51,7 @@ function Home() {
   }
 
   const onAdd = async(product) => {
+    
     await axios.post("http://localhost:9002/addtocart" , { product });
     setreRender(!reRender)
   };
