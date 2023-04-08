@@ -51,13 +51,13 @@ function Home() {
   }
 
   const onAdd = async(product) => {
-    
-    await axios.post("http://localhost:9002/addtocart" , { product });
+
+    await axios.post("http://localhost:9002/addtocart" , { product , user});
     setreRender(!reRender)
   };
 
   const onRemove = async (product) => {
-    await axios.post("http://localhost:9002/removefromcart", {product});
+    await axios.post("http://localhost:9002/removefromcart", {product , user});
     setreRender(!reRender)
   };
 

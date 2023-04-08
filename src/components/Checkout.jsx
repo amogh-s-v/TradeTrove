@@ -1,11 +1,13 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { useHistory } from 'react-router-dom';
 
 export default function checkout() {
 
   const [cartItems, setCartItems] = useState([]);
+  
+  const history = useHistory();
 
   const [orderDetails, setOrderDetails] = useState({
     items: [],
@@ -52,6 +54,11 @@ export default function checkout() {
     };
     setOrderDetails(updatedOrderDetails);
     const result = await purchase(orderDetails);
+    const redirectMe = (url) => {
+      history.push(url)
+      window.location.reload();
+    }
+    redirectMe('/')
   }
 
   const url = "http://localhost:9002/order";
@@ -67,7 +74,7 @@ export default function checkout() {
 
   const getCartItems = async () => {
     try {
-      const { data } = await axios.get("http://localhost:9002/cart")
+      const { data } = await axios.post("http://localhost:9002/cart", {user})
       return data
     } catch (error) {
       console.log(error)
@@ -80,7 +87,7 @@ export default function checkout() {
       setCartItems(result)
     }
     fetchData()
-  }, [])
+  }, [user])
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
   const taxPrice = itemsPrice * 0.14;

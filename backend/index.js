@@ -17,19 +17,19 @@ const userSchema = new mongoose.Schema({
 const User = new mongoose.model("User", userSchema)
 
 const cartItemSchema = new mongoose.Schema({
-    _id: { type: mongoose.Schema.Types.ObjectId },
+    _id: { type: String },
     title: { type: String, required: true },
     image: { type: String, required: true },
     price: { type: Number, required: true },
-    qty: { type: Number, default: 1 }, 
-    uploader: {type: String}
+    qty: { type: Number, default: 1 },
+    uploader: { type: String },
 });
 const CartItem = mongoose.model('CartItem', cartItemSchema);
 
 const itemSchema = mongoose.Schema({
     title: String,
     image: String,
-    price: Number, 
+    price: Number,
     uploader: String
 }, { timestamps: false })
 const Item = mongoose.model('Item', itemSchema);
@@ -85,14 +85,15 @@ app.post("/login", (req, res) => {
 })
 
 app.post('/addtocart', async (req, res) => {
-    const { product } = req.body;
+    const { product, user } = req.body;
     try {
-        const exist = await CartItem.findOne({ _id: product._id });
+        const exist = await CartItem.findOne({ _id: product._id + "_" + user.name });
         if (exist) {
             exist.qty += 1;
             await exist.save();
         } else {
-            const newCartItem = new CartItem({ ...product});
+            const newCartItem = new CartItem({ ...product });
+            newCartItem._id = newCartItem._id + "_" + user.name
             await newCartItem.save();
         }
         res.sendStatus(200);
@@ -103,13 +104,13 @@ app.post('/addtocart', async (req, res) => {
 });
 
 app.post('/removefromcart', async (req, res) => {
-    const { product } = req.body;
+    const { product, user } = req.body;
     try {
-        const exist = await CartItem.findOne({ _id: product._id });
+        const exist = await CartItem.findOne({ _id: product._id + "_" + user.name });
         if (exist.qty === 1) {
             await exist.remove();
         }
-        else{
+        else {
             exist.qty -= 1;
             await exist.save();
         }
@@ -120,25 +121,44 @@ app.post('/removefromcart', async (req, res) => {
     }
 });
 
-app.get('/cart', async(req, res)=>{
+app.post("/cart", async(req, res)=>{
+    const { user } = req.body;
+    let cartitem;
+  
+    const getUser = new Promise((resolve, reject) => {
+      if (user) {
+        resolve(user);
+      } else {
+        reject('User not found');
+      }
+    });
+  
     try {
-        const cartitem = await CartItem.find()
-        res.status(200).json(cartitem);
+      const fetchedUser = await getUser;
+      console.log(fetchedUser.name);
+      cartitem = await CartItem.find({
+        _id: { $regex: new RegExp(`_${fetchedUser.name}$`) }
+      });
+      res.status(200).json(cartitem);
     } catch (error) {
-        res.status(404).json({ message: error.message });
+      console.log(error);
+      res.status(404).json({ message: 'Error finding cart items.' });
     }
-})
+  });
+  
 
 
 app.get('/getIMG', function (req, res) {
     res.sendFile('E:/Amogh/PES/Semester-VI/CC/Project/TradeTrove/delivery_app.png');
 })
 
-app.post('/order', async (req, res) =>{
+app.post('/order', async (req, res) => {
     const orderdetails = new Order(req.body);
     try {
         await orderdetails.save();
-        // await CartItem.remove({_id: req.body.id})
+        await CartItem.remove({
+            _id: { $regex: new RegExp(`_${orderdetails.buyer}$`) }
+          })
         res.status(201).json(orderdetails);
     } catch (error) {
     }

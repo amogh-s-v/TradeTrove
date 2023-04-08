@@ -10,9 +10,15 @@ export default function Basket(props) {
 
   const [cartItems, setCartItems] = useState([]);
 
+  const [user, setLoginUser] = useState({})
+
+  useEffect(() => {
+    setLoginUser(JSON.parse(localStorage.getItem("MyUser")))
+  }, [])
+
   const getCartItems = async () => {
     try {
-      const { data } = await axios.get("http://localhost:9002/cart")
+      const { data } = await axios.post("http://localhost:9002/cart", {user})
       return data
     } catch (error) {
       console.log(error)
@@ -26,7 +32,7 @@ export default function Basket(props) {
       setCartItems(result)
     }
     fetchData()
-  }, [reRender])
+  }, [reRender, user])
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
   const taxPrice = itemsPrice * 0.14;
