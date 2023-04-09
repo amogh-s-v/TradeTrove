@@ -93,7 +93,9 @@ app.post('/addtocart', async (req, res) => {
             await exist.save();
         } else {
             const newCartItem = new CartItem({ ...product });
-            newCartItem._id = newCartItem._id + "_" + user.name
+            if (!newCartItem._id.endsWith("_" + user.name)){
+                newCartItem._id = newCartItem._id + "_" + user.name
+            }
             await newCartItem.save();
         }
         res.sendStatus(200);
