@@ -94,7 +94,7 @@ app.post('/addtocart', async (req, res) => {
         } else {
             const newCartItem = new CartItem({ ...product });
             if (!newCartItem._id.endsWith("_" + user.name)){
-                newCartItem._id = newCartItem._id + "_" + user.name
+                newCartItem._id = newCartItem._id.replace(/_[^_]*$/, "") + "_" + user.name;
             }
             await newCartItem.save();
         }

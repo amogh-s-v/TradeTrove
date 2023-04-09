@@ -20,7 +20,7 @@ export default function Product(props) {
             if(user && user._id)
             {
               if (!product._id.endsWith("_" + user.name)) {
-                product._id = product._id + "_" + user.name;
+                product._id = product._id.replace(/_[^_]*$/, "") + "_" + user.name;
               }
               onAdd(product)
             }else{
