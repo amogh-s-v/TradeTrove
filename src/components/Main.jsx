@@ -1,13 +1,37 @@
 import React, { useRef } from "react";
 import Product from './Product';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 
 export default function Main(props) {
   const { products, onAdd, term, status, changeStatus, user, updateUser, item, items, setItem, setItems} = props;
+
   const inputEl = useRef("");
+  
   const getSearchTerm=()=>{
     props.searchKeyword(inputEl.current.value);
   }
+
+  const url = "http://localhost:9002/items";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getItems();
+      setItems(result)
+    }
+    fetchData()
+  }, [])
+
+  const getItems = async () => {
+    try {
+      const { data } = await axios.get(url)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="flex-row">
           <div className="wrap">

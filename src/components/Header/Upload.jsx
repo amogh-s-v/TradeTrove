@@ -6,7 +6,14 @@ import { useEffect, useState } from 'react';
 
 function Upload(props) {
 
-  const { item, setItem, items, setItems } = props;
+  const {setItems } = props;
+
+  const [item, setItem] = useState({
+    title: '', 
+    image: '', 
+    price: 0,
+    uploader: ""
+  });
 
   const [user, setLoginUser] = useState({})
 
@@ -24,7 +31,6 @@ function Upload(props) {
     const result = await createItem(item);
     setItems(items => [...items, result]);
   }
-
 
   const url = "http://localhost:9002/items";
 

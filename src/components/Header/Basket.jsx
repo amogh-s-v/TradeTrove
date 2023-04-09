@@ -35,9 +35,6 @@ export default function Basket(props) {
   }, [reRender, user])
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
-  const taxPrice = itemsPrice * 0.14;
-  const shippingPrice = itemsPrice > 2000 ? 0 : 70;
-  const totalPrice = itemsPrice + taxPrice + shippingPrice;
 
   const history = useHistory();
 
