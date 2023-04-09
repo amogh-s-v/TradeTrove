@@ -5,21 +5,6 @@ import styled from 'styled-components';
 
 export default function Product(props) {
   const { product, onAdd, status, changeStatus, user, updateUser, item, setItem, items, setItems } = props;
-  const SidebarNav = styled.nav`
-  background: #15171c;
-  width:500px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  right: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
-  transition: 350ms;
-  z-index: 10;
-`;
-const [sidebar, setSidebar] = useState(false);
-
-const showSidebar = () => setSidebar(!sidebar);
   return (
     <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
       
@@ -34,6 +19,9 @@ const showSidebar = () => setSidebar(!sidebar);
           onClick={() => {
             if(user && user._id)
             {
+              if (!product._id.endsWith("_" + user.name)) {
+                product._id = product._id + "_" + user.name;
+              }
               onAdd(product)
             }else{
               alert('Please Login!')

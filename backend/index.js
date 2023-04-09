@@ -87,13 +87,15 @@ app.post("/login", (req, res) => {
 app.post('/addtocart', async (req, res) => {
     const { product, user } = req.body;
     try {
-        const exist = await CartItem.findOne({ _id: product._id + "_" + user.name });
+        const exist = await CartItem.findOne({ _id: product._id });
         if (exist) {
             exist.qty += 1;
             await exist.save();
         } else {
             const newCartItem = new CartItem({ ...product });
-            newCartItem._id = newCartItem._id + "_" + user.name
+            if (!newCartItem._id.endsWith("_" + user.name)){
+                newCartItem._id = newCartItem._id + "_" + user.name
+            }
             await newCartItem.save();
         }
         res.sendStatus(200);
@@ -106,7 +108,7 @@ app.post('/addtocart', async (req, res) => {
 app.post('/removefromcart', async (req, res) => {
     const { product, user } = req.body;
     try {
-        const exist = await CartItem.findOne({ _id: product._id + "_" + user.name });
+        const exist = await CartItem.findOne({ _id: product._id });
         if (exist.qty === 1) {
             await exist.remove();
         }
