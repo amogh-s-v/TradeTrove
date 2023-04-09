@@ -11,13 +11,7 @@ import { useEffect, useState } from 'react';
 
 export default function Header(props) {
   
-  const { onAdd, onRemove, updateUser, setItems, reRender } = props;
-
-  const [user, setLoginUser] = useState({})
-
-  useEffect(() => {
-    setLoginUser(JSON.parse(localStorage.getItem("MyUser")))
-  }, [])
+  const { onAdd, onRemove, setItems, reRender, user, updateUser } = props;
 
   var s = {
     height: "2cm",
