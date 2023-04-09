@@ -34,6 +34,7 @@ const showSidebar = () => setSidebar(!sidebar);
           onClick={() => {
             if(user && user._id)
             {
+              product._id = product._id + user.name;
               onAdd(product)
             }else{
               alert('Please Login!')
