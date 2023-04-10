@@ -8,7 +8,6 @@ function Home() {
 
   const [item, setItem] = useState({ title: '', image: '', price: 0 });
   const [items, setItems] = useState([])
-  const [cartItems, setCartItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("")
   const [searchResults, setSearchResults] = useState([]);
 
@@ -16,30 +15,10 @@ function Home() {
 
   const [user, setLoginUser] = useState({})
 
-  const url = "http://localhost:9002/items";
-
-  const urlItems = "http://localhost:9002/cart";
-
   var s = {
     height : "1cm",
     width : "3cm"
   }
-
-  const getCartItems = async () => {
-    try {
-      const { data } = await axios.get("http://localhost:9002/cart")
-      return data
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await getCartItems();
-      setCartItems(result)
-    }
-    fetchData()
-  }, [])
 
   useEffect(() => {
     setLoginUser(JSON.parse(localStorage.getItem("MyUser")))
@@ -76,37 +55,12 @@ function Home() {
     }
   };
 
-  
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await getItems();
-      setItems(result)
-    }
-    fetchData()
-  }, [])
-
-  const getItems = async () => {
-    try {
-      const { data } = await axios.get(url)
-      return data
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-
-
   return (
     <div className="text-gray-400 bg-gray-900 body-font">
       <Header
-        item={item}
-        setItem={setItem}
-        items={items}
         setItems={setItems}
         user={user}
         updateUser={updateUser}
-        cartItems={cartItems}
         onAdd={onAdd}
         onRemove={onRemove}
         reRender = {reRender}

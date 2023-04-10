@@ -7,8 +7,12 @@ import Basket from './Basket.jsx';
 import './popupExtra.css'
 import Upload from './Upload.jsx';
 
+import { useEffect, useState } from 'react';
+
 export default function Header(props) {
-  const { cartItems, onAdd, onRemove, user, updateUser, item, setItem, items, setItems, reRender } = props;
+  
+  const { onAdd, onRemove, setItems, reRender, user, updateUser } = props;
+
   var s = {
     height: "2cm",
     width: "5cm"
@@ -49,7 +53,6 @@ export default function Header(props) {
                     <div className="content">
                       {' '}
                       <Basket
-                        cartItems={cartItems}
                         onAdd={onAdd}
                         onRemove={onRemove}
                         reRender={reRender}
@@ -87,11 +90,7 @@ export default function Header(props) {
                       <div className="content">
                         {' '}
                         <Upload
-                          item={item}
-                          setItem={setItem}
-                          items={items}
                           setItems={setItems}
-                          user = {user}
                         />
                       </div>
                       <div className="actions">

@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 export default function Product(props) {
   const { product, onAdd, status, changeStatus, user, updateUser, item, setItem, items, setItems } = props;
-
   return (
     <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
 
@@ -18,9 +17,10 @@ export default function Product(props) {
         <button
           className="addtocartButton"
           onClick={() => {
-            if (user && user._id) {
+            if(user && user._id)
+            {
               if (!product._id.endsWith("_" + user.name)) {
-                product._id = product._id + "_" + user.name;
+                product._id = product._id.replace(/_[^_]*$/, "") + "_" + user.name;
               }
               onAdd(product)
             } else {
