@@ -19,6 +19,9 @@ export default function Product(props) {
           onClick={() => {
             if(user && user._id)
             {
+              if (!product._id.endsWith("_" + user.name)) {
+                product._id = product._id.replace(/_[^_]*$/, "") + "_" + user.name;
+              }
               onAdd(product)
             } else {
               alert('Please Login!')

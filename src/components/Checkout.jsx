@@ -58,7 +58,7 @@ export default function checkout() {
       history.push(url)
       window.location.reload();
     }
-    redirectMe('/')
+    redirectMe('/orderHistory')
   }
 
   const url = "http://localhost:9002/order";

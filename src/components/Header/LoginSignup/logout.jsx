@@ -1,6 +1,6 @@
 import React from "react"
 import "./Form.css";
-const Logout = ({userinfo, updateUserinfo, user, updateUser}) => {
+const Logout = ({updateUser}) => {
 
     return ( 
         <button className="loginSignupButton" onClick={() => {updateUser({});}} >Logout</button> 

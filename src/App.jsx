@@ -3,6 +3,7 @@ import './index.css';
 import { useEffect, useState } from 'react';
 import { BrowserRouter, BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import checkout from './components/Checkout.jsx';
+import Orderhistory from './components/Orderhistory.jsx';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
               <Route path='/' exact component={Home} />
               {/* <Route path = '/pending' exact component={PendingTransactions}/> */}
               <Route path='/checkout' exact component={checkout} />
+              <Route path='/orderHistory' exact component={Orderhistory} />
             </Switch>
             :
             <Switch>
