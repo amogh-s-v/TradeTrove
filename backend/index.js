@@ -18,6 +18,7 @@ const User = new mongoose.model("User", userSchema)
 
 const cartItemSchema = new mongoose.Schema({
     _id: { type: String },
+    owner: {type: String},
     title: { type: String, required: true },
     image: { type: String, required: true },
     price: { type: Number, required: true },
@@ -87,15 +88,13 @@ app.post("/login", (req, res) => {
 app.post('/addtocart', async (req, res) => {
     const { product, user } = req.body;
     try {
-        const exist = await CartItem.findOne({ _id: product._id });
+        const exist = await CartItem.findOne({ _id: product._id, owner: user.name});
         if (exist) {
             exist.qty += 1;
             await exist.save();
         } else {
+            product.owner = user.name;
             const newCartItem = new CartItem({ ...product });
-            if (!newCartItem._id.endsWith("_" + user.name)){
-                newCartItem._id = newCartItem._id.replace(/_[^_]*$/, "") + "_" + user.name;
-            }
             await newCartItem.save();
         }
         res.sendStatus(200);
@@ -108,7 +107,7 @@ app.post('/addtocart', async (req, res) => {
 app.post('/removefromcart', async (req, res) => {
     const { product, user } = req.body;
     try {
-        const exist = await CartItem.findOne({ _id: product._id });
+        const exist = await CartItem.findOne({ _id: product._id, owner: user.name});
         if (exist.qty === 1) {
             await exist.remove();
         }
@@ -138,9 +137,7 @@ app.post("/cart", async(req, res)=>{
     try {
       const fetchedUser = await getUser;
       console.log(fetchedUser.name);
-      cartitem = await CartItem.find({
-        _id: { $regex: new RegExp(`_${fetchedUser.name}$`) }
-      });
+      cartitem = await CartItem.find({owner: user.name});
       res.status(200).json(cartitem);
     } catch (error) {
       console.log(error);
