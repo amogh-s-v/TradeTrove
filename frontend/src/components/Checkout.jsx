@@ -5,8 +5,6 @@ import { useHistory } from 'react-router-dom';
 
 export default function checkout() {
 
-  const nav = useNavigate
-
   const [cartItems, setCartItems] = useState([]);
   
   const history = useHistory();
@@ -67,7 +65,7 @@ export default function checkout() {
 
   const purchase = async (order) => {
     try {
-      const { data } = await axios.post(url, order);
+      const { data } = await axios.post(url, {order, totalPrice});
       return data
     } catch (error) {
       console.log(error)

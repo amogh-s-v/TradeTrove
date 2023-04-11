@@ -156,8 +156,10 @@ app.get('/getIMG', function (req, res) {
 })
 
 app.post('/order', async (req, res) => {
-    const orderdetails = new Order(req.body);
+    const {order, totalPrice} = req.body;
+    const orderdetails = new Order(order);
     try {
+        orderdetails.price = totalPrice;
         await orderdetails.save();
         await CartItem.remove({ owner: orderdetails.buyer })
         res.status(201).json(orderdetails);

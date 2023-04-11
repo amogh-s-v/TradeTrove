@@ -55,12 +55,12 @@ function Orderhistory() {
                                     {order.items.map((product) => (
                                         <div key={product.title} className="flex items-center">
                                             <div className="text-base font-medium text-cyan-400">
-                                                {product.title} 
+                                                {product.title}&nbsp;
                                             </div>
-                                            <div className="text-base font-medium text-white">
+                                            <div className="text-base font-medium text-emerald-200">
                                                  X {product.qty}
                                             </div>
-                                            <div className="ml-auto text-base font-medium text-gray-400">
+                                            <div className="ml-auto text-base font-medium text-pink-500	">
                                                 {product.price}
                                             </div>
                                         </div>
@@ -70,7 +70,12 @@ function Orderhistory() {
                                     <div className="text-base font-medium text-white">
                                         Total Price: {order.price}
                                     </div>
-                                    
+                                </div>
+                                <br></br>
+                                <div className="flex justify-between items-center">
+                                    <div className="text-base font-bold text-fuchsia-200	">
+                                        Delivering at : {order.address}
+                                    </div>
                                 </div>
                             </div>
                         </div>
