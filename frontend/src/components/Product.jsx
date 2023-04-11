@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import React from 'react';
 import './Header/BasketStyle.css'
-import styled from 'styled-components';
 
 export default function Product(props) {
-  const { product, onAdd, user } = props;
+  const { product, onAdd, user, handleProductSelect } = props;
   return (
-    <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
+    <div className="lg:w-1/4 md:w-1/2 p-4 w-full border-2 border-white p-4">
 
       <a className="block relative h-48 rounded overflow-hidden">
         <img className="object-cover object-center w-full h-full block" src={product.image} alt={product.title} />
@@ -14,21 +13,30 @@ export default function Product(props) {
       <div className="mt-4">
         <h3 className="text-white title-font text-lg font-medium">{product.title}</h3>
         <p className="mt-1">₹{product.price}</p>
-        <button
-          className="addtocartButton"
-          onClick={() => {
-            if(user && user._id)
-            {
-              if (!product._id.endsWith("_" + user.name)) {
-                product._id = product._id.replace(/_[^_]*$/, "") + "_" + user.name;
+        <div className="flex">
+          <button
+            onClick={() => handleProductSelect(product)}
+            className="text-white bg-cyan-500 py-0.1 px-2 hover:bg-blue-800 focus:outline-none rounded-none"
+          >
+            View More
+          </button>
+
+          <button
+            className="addtocartButton ml-auto"
+            onClick={() => {
+              if (user && user._id) {
+                if (!product._id.endsWith("_" + user.name)) {
+                  product._id = product._id.replace(/_[^_]*$/, "") + "_" + user.name;
+                }
+                onAdd(product)
+              } else {
+                alert('Please Login!')
               }
-              onAdd(product)
-            } else {
-              alert('Please Login!')
-            }
-          }}>
-          <span data-title="YES!">ADD TO CART?</span>
-        </button>
+            }}>
+            <span data-title="YES!">ADD TO CART?</span>
+          </button>
+        </div>
+
       </div>
     </div>
 

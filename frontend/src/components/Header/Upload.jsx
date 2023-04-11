@@ -11,6 +11,7 @@ function Upload(props) {
   const [item, setItem] = useState({
     title: '', 
     image: '', 
+    description: '',
     price: 0,
     uploader: ""
   });
@@ -59,6 +60,12 @@ function Upload(props) {
           className="w-full rounded-md border-gray-300 shadow-sm px-4 py-2 bg-gray-100 text-gray-700 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm mb-4 mx-auto max-w-sm"
           onChange={e => setItem({ ...item, price: e.target.value })}
         />
+        <input
+          type="text"
+          placeholder="Description"
+          className="w-full rounded-md border-gray-300 shadow-sm px-4 py-2 bg-gray-100 text-gray-700 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm mb-4 mx-auto max-w-sm"
+          onChange={e => setItem({ ...item, description: e.target.value })}
+        />
         <FileBase64
           type="file"
           multiple={false}
@@ -72,7 +79,7 @@ function Upload(props) {
         />
         <input
           type="text"
-          placeholder={user.name}
+          placeholder={"Uploaded by: "+user.name}
           readOnly
           className="w-full rounded-md border-gray-300 shadow-sm px-4 py-2 bg-gray-100 text-gray-700 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm mb-4 mx-auto max-w-sm"
         />

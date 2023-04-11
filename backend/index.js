@@ -30,6 +30,7 @@ const CartItem = mongoose.model('CartItem', cartItemSchema);
 const itemSchema = mongoose.Schema({
     title: String,
     image: String,
+    description: String,
     price: Number,
     uploader: String
 }, { timestamps: false })
