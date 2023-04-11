@@ -54,11 +54,11 @@ function Orderhistory() {
                                 <div className="mt-4">
                                     {order.items.map((product) => (
                                         <div key={product.title} className="flex items-center">
-                                            <div className="text-base font-medium text-white">
-                                                {product.title} x
+                                            <div className="text-base font-medium text-cyan-400">
+                                                {product.title} 
                                             </div>
                                             <div className="text-base font-medium text-white">
-                                                 {product.qty}
+                                                 X {product.qty}
                                             </div>
                                             <div className="ml-auto text-base font-medium text-gray-400">
                                                 {product.price}

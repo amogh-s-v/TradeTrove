@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 
 export default function checkout() {
 
+  const nav = useNavigate
+
   const [cartItems, setCartItems] = useState([]);
   
   const history = useHistory();
