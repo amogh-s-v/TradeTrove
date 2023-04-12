@@ -1,4 +1,4 @@
-FROM node:alpine as ecommerce-app-build
+FROM node:alpine
 
 WORKDIR /cart
 
