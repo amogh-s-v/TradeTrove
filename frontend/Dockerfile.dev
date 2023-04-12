@@ -1,0 +1,11 @@
+FROM node:alpine as ecommerce-app-build
+
+WORKDIR /frontend
+
+COPY ./package.json ./
+
+RUN yarn
+
+COPY . .
+
+CMD ["yarn", "dev"]

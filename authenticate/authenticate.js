@@ -1,9 +1,11 @@
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
+import keys from "./keys.js"
 
 
 const app = express()
+
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.json())
 app.use(express.urlencoded())
@@ -55,7 +57,7 @@ app.post("/register", (req, res) => {
 })
 
 const mongodb = "mongodb://localhost:27017/TradeTrove";
-const PORT = process.env.PORT || 9002;
+const PORT = keys.dataBase || 9002;
 mongoose.connect(mongodb, {
     useNewUrlParser: true,
     useUnifiedTopology: true

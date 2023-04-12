@@ -18,7 +18,7 @@ function Orderhistory() {
 
     const getOrders = async () => {
         try {
-            const { data } = await axios.post(url + "/orderhistory", { user })
+            const { data } = await axios.post("/api/orderhistory", { user })
             return data
         } catch (error) {
             console.log(error)

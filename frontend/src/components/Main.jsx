@@ -26,7 +26,7 @@ export default function Main(props) {
 
   const getItems = async () => {
     try {
-      const { data } = await axios.get(url)
+      const { data } = await axios.get("/api/items")
       return data
     } catch (error) {
       console.log(error)

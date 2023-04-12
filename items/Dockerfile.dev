@@ -1,0 +1,11 @@
+FROM node:alpine as ecommerce-app-build
+
+WORKDIR /items
+
+COPY ./package.json ./
+
+RUN yarn
+
+COPY . .
+
+CMD ["node", "./items.js"]
