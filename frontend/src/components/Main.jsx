@@ -14,7 +14,7 @@ export default function Main(props) {
     props.searchKeyword(inputEl.current.value);
   }
 
-  const url = "http://localhost:9002/items";
+  const url = "http://localhost:9004/items";
 
   useEffect(() => {
     const fetchData = async () => {

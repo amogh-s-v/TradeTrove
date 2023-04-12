@@ -11,13 +11,14 @@ function Orderhistory() {
 
     const [user, setLoginUser] = useState({})
 
+    const url = "http://localhost:9005"
     useEffect(() => {
         setLoginUser(JSON.parse(localStorage.getItem("MyUser")))
     }, [])
 
     const getOrders = async () => {
         try {
-            const { data } = await axios.post("http://localhost:9002/orderhistory", { user })
+            const { data } = await axios.post(url + "/orderhistory", { user })
             return data
         } catch (error) {
             console.log(error)

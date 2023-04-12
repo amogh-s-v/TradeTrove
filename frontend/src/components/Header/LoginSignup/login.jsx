@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom"
 import "./Form.css";
 const Login = ({ updateUser }) => {
 
+    const url = "http://localhost:9002"
 
     const history = useHistory()
 
@@ -21,7 +22,7 @@ const Login = ({ updateUser }) => {
     }
 
     const login = () => {
-        axios.post("http://localhost:9002/login", user)
+        axios.post(url + "/login", user)
             .then(res => {
                 alert(res.data.message)
                 updateUser(res.data.user)

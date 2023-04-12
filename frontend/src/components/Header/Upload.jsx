@@ -33,7 +33,7 @@ function Upload(props) {
     setItems(items => [...items, result]);
   }
 
-  const url = "http://localhost:9002/items";
+  const url = "http://localhost:9004/items";
 
   const createItem = async (item) => {
     try {

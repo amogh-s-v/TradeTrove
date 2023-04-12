@@ -61,11 +61,10 @@ export default function checkout() {
     redirectMe('/orderHistory')
   }
 
-  const url = "http://localhost:9002/order";
-
+  
   const purchase = async (order) => {
     try {
-      const { data } = await axios.post(url, {order, totalPrice});
+      const { data } = await axios.post("http://localhost:9005/order", {order, totalPrice});
       return data
     } catch (error) {
       console.log(error)
@@ -74,7 +73,7 @@ export default function checkout() {
 
   const getCartItems = async () => {
     try {
-      const { data } = await axios.post("http://localhost:9002/cart", {user})
+      const { data } = await axios.post("http://localhost:9003/cart", {user})
       return data
     } catch (error) {
       console.log(error)

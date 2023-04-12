@@ -7,6 +7,8 @@ const Register = () => {
 
     const history = useHistory()
 
+    const url = "http://localhost:9002"
+
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -25,7 +27,7 @@ const Register = () => {
     const register = () => {
         const { name, email, password, reEnterPassword } = user
         if (name && email && password && (password === reEnterPassword)) {
-            axios.post("http://localhost:9002/register", user)
+            axios.post(url + "/register", user)
                 .then(res => {
                     alert(res.data.message)
 

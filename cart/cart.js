@@ -85,7 +85,7 @@ app.post("/cart", async (req, res) => {
 });
 
 const mongodb = "mongodb://localhost:27017/TradeTrove";
-const PORT = process.env.PORT || 9002;
+const PORT = process.env.PORT || 9003;
 mongoose.connect(mongodb, {
     useNewUrlParser: true,
     useUnifiedTopology: true
