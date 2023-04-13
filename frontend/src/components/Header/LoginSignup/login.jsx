@@ -22,7 +22,7 @@ const Login = ({ updateUser }) => {
     }
 
     const login = () => {
-        axios.post("/api/login", user)
+        axios.post("http://localhost:5000/login", user)
             .then(res => {
                 alert(res.data.message)
                 updateUser(res.data.user)

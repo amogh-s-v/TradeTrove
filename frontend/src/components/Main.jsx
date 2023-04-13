@@ -26,7 +26,8 @@ export default function Main(props) {
 
   const getItems = async () => {
     try {
-      const { data } = await axios.get("/api/items")
+      console.log("making first request")
+      const { data } = await axios.get("http://localhost:5002/items")
       return data
     } catch (error) {
       console.log(error)

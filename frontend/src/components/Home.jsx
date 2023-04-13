@@ -33,12 +33,12 @@ function Home() {
 
   const onAdd = async(product) => {
 
-    await axios.post("/api/addtocart" , { product , user});
+    await axios.post("http://localhost:5001/addtocart" , { product , user});
     setreRender(!reRender)
   };
 
   const onRemove = async (product) => {
-    await axios.post("/api/removefromcart", {product , user});
+    await axios.post("http://localhost:5001/removefromcart", {product , user});
     setreRender(!reRender)
   };
 

@@ -38,7 +38,7 @@ function Upload(props) {
   const createItem = async (item) => {
     try {
       console.log(item)
-      const { data } = await axios.post("/api/items", item);
+      const { data } = await axios.post("http://localhost:5002/items", item);
       return data
     } catch (error) {
       console.log(error)

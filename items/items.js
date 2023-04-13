@@ -1,7 +1,6 @@
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
-import keys from "./keys.js"
 
 const app = express()
 
@@ -50,7 +49,7 @@ app.get('/contact', function (req, res) {
 
 
 const mongodb = "mongodb+srv://amoghsv:m9Niqwi33oTc9r1t@cluster0.cwqcvrn.mongodb.net/TradeTrove?retryWrites=true&w=majority";
-const PORT = keys.dataBase || 9004;
+const PORT = 5002;
 mongoose.connect(mongodb, {
     useNewUrlParser: true,
     useUnifiedTopology: true

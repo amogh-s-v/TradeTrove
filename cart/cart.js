@@ -1,7 +1,6 @@
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
-import keys from "./keys.js"
 
 const app = express()
 
@@ -62,7 +61,7 @@ app.post('/removefromcart', async (req, res) => {
     }
 });
 
-app.post("/cart", async (req, res) => {
+app.post("/", async (req, res) => {
     const { user } = req.body;
     let cartitem;
 
@@ -86,7 +85,7 @@ app.post("/cart", async (req, res) => {
 });
 
 const mongodb = "mongodb+srv://amoghsv:m9Niqwi33oTc9r1t@cluster0.cwqcvrn.mongodb.net/TradeTrove?retryWrites=true&w=majority";
-const PORT = keys.dataBase || 9003;
+const PORT = 5001;
 mongoose.connect(mongodb, {
     useNewUrlParser: true,
     useUnifiedTopology: true

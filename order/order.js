@@ -1,7 +1,6 @@
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
-import keys from "./keys.js"
 
 const app = express()
 
@@ -22,7 +21,7 @@ const orderSchema = mongoose.Schema({
 }, { timestamps: true })
 const Order = mongoose.model('Order', orderSchema);
 
-app.post('/order', async (req, res) => {
+app.post('/', async (req, res) => {
     const {order, totalPrice} = req.body;
     const orderdetails = new Order(order);
     try {
@@ -48,7 +47,7 @@ app.post('/orderhistory', async (req, res) => {
 })
 
 const mongodb = "mongodb+srv://amoghsv:m9Niqwi33oTc9r1t@cluster0.cwqcvrn.mongodb.net/TradeTrove?retryWrites=true&w=majority";
-const PORT = keys.dataBase || 9005;
+const PORT = 5003;
 mongoose.connect(mongodb, {
     useNewUrlParser: true,
     useUnifiedTopology: true

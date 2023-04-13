@@ -64,7 +64,7 @@ export default function checkout() {
   
   const purchase = async (order) => {
     try {
-      const { data } = await axios.post("api/order", {order, totalPrice});
+      const { data } = await axios.post("http://localhost:5003/order", {order, totalPrice});
       return data
     } catch (error) {
       console.log(error)
@@ -73,7 +73,7 @@ export default function checkout() {
 
   const getCartItems = async () => {
     try {
-      const { data } = await axios.post("api/cart", {user})
+      const { data } = await axios.post("http://localhost:5001/cart", {user})
       return data
     } catch (error) {
       console.log(error)

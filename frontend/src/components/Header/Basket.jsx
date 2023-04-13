@@ -20,7 +20,7 @@ export default function Basket(props) {
 
   const getCartItems = async () => {
     try {
-      const { data } = await axios.post("/api/cart", {user})
+      const { data } = await axios.post("http://localhost:5001/cart", {user})
       return data
     } catch (error) {
       console.log(error)
