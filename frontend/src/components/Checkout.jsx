@@ -58,12 +58,13 @@ export default function checkout() {
       history.push(url)
       window.location.reload();
     }
-    redirectMe('/orderHistory')
+    redirectMe('/orderhistory')
   }
 
   
   const purchase = async (order) => {
     try {
+      console.log("placing order")
       const { data } = await axios.post("http://localhost:5003/order", {order, totalPrice});
       return data
     } catch (error) {

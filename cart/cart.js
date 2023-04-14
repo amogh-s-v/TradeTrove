@@ -61,7 +61,7 @@ app.post('/removefromcart', async (req, res) => {
     }
 });
 
-app.post("/", async (req, res) => {
+app.post("/cart", async (req, res) => {
     const { user } = req.body;
     let cartitem;
 

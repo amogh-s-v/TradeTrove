@@ -21,7 +21,7 @@ const orderSchema = mongoose.Schema({
 }, { timestamps: true })
 const Order = mongoose.model('Order', orderSchema);
 
-app.post('/', async (req, res) => {
+app.post('/order', async (req, res) => {
     const {order, totalPrice} = req.body;
     const orderdetails = new Order(order);
     try {
