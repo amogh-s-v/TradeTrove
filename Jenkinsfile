@@ -1,11 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Clone') {
-            steps {
-                bat 'git pull'
-            }
-        }
         stage('Build Docker Images') {
             steps {
                 script {
