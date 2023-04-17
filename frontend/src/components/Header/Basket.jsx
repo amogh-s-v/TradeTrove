@@ -33,7 +33,7 @@ export default function Basket(props) {
       setCartItems(result)
     }
     fetchData()
-  }, [reRender, user])
+  }, [user])
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
 
