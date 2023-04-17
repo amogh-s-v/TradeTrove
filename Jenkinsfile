@@ -10,7 +10,7 @@ pipeline {
                     bat 'docker build -t tradetrove-items ./items'
                     bat 'docker build -t tradetrove-order ./order'
                 }
-            } 
+            }
         }
         stage('Deploy') {
             steps {
