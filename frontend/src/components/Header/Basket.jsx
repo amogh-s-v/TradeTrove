@@ -27,8 +27,10 @@ export default function Basket(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getCartItems();
-      setCartItems(result)
+      if(user!==null){
+        const result = await getCartItems();
+        setCartItems(result)
+      }
     }
     fetchData()
   }, [reRender, user])
