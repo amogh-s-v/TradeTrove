@@ -26,7 +26,7 @@ export default function Main(props) {
 
   const getItems = async () => {
     try {
-      console.log("test commit amogh 001")
+      console.log("test commit amogh 01")
       const { data } = await axios.get("http://localhost:5002/items")
       return data
     } catch (error) {
