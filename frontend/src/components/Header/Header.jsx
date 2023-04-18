@@ -14,6 +14,8 @@ export default function Header(props) {
   
   const history = useHistory();
 
+  
+
   var s = {
     height: "2cm",
     width: "5cm"
@@ -66,6 +68,7 @@ export default function Header(props) {
                         onAdd={onAdd}
                         onRemove={onRemove}
                         reRender={reRender}
+                        user = {user}
                       ></Basket>
                     </div>
                     <div className="actions">

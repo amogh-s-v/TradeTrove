@@ -6,15 +6,9 @@ import axios from 'axios';
 
 export default function Basket(props) {
 
-  const { onAdd, onRemove, reRender } = props;
+  const { onAdd, onRemove, reRender, user } = props;
 
   const [cartItems, setCartItems] = useState([]);
-
-  const [user, setLoginUser] = useState({})
-
-  useEffect(() => {
-    setLoginUser(JSON.parse(localStorage.getItem("MyUser")))
-  }, [])
 
   const getCartItems = async () => {
     try {
@@ -33,7 +27,7 @@ export default function Basket(props) {
       }
     }
     fetchData()
-  }, [reRender, user])
+  }, [reRender])
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
 
