@@ -22,7 +22,7 @@ function Orderhistory() {
 
     const getOrders = async () => {
         try {
-            const { data } = await axios.post("http://localhost:9002/orderhistory", { user })
+            const { data } = await axios.post("http://localhost:5003/orderhistory", { user })
             return data
         } catch (error) {
             console.log(error)

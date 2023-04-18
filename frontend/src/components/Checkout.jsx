@@ -61,7 +61,7 @@ export default function checkout() {
     redirectMe('/orderHistory')
   }
 
-  const url = "http://localhost:9002/order";
+  const url = "http://localhost:5003/order";
 
   const purchase = async (order) => {
     try {
@@ -74,7 +74,7 @@ export default function checkout() {
 
   const getCartItems = async () => {
     try {
-      const { data } = await axios.post("http://localhost:9002/cart", {user})
+      const { data } = await axios.post("http://localhost:5001/cart", {user})
       return data
     } catch (error) {
       console.log(error)
