@@ -15,6 +15,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    bat 'kubectl delete deployments --all'
+                    bat 'kubectl delete services --all'
                     bat 'kubectl apply -f ./k8s/'
                 }
             }
