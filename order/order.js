@@ -27,11 +27,15 @@ app.post('/order', async (req, res) => {
     try {
         orderdetails.price = totalPrice;
         await orderdetails.save();
-        await CartItem.remove({ owner: orderdetails.buyer })
+        const deletedItems = await CartItem.deleteMany({ owner: orderdetails.buyer });
+        console.log(`Deleted ${deletedItems.deletedCount} items from the cart of user ${orderdetails.buyer}`);
         res.status(201).json(orderdetails);
     } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-})
+});
+
 
 app.post('/orderhistory', async (req, res) => {
     const { user } = req.body;
