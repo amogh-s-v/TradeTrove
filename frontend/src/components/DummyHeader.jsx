@@ -1,6 +1,12 @@
 import React from "react";
 
 export default function DummyHeader() {
+
+    var s = {
+        height: "2cm",
+        width: "5cm"
+    }
+
     return (
         <header className="text-gray-400 bg-gray-900 body-font">
             <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
