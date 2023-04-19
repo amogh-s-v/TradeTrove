@@ -21,6 +21,17 @@ const orderSchema = mongoose.Schema({
 }, { timestamps: true })
 const Order = mongoose.model('Order', orderSchema);
 
+const cartItemSchema = new mongoose.Schema({
+    _id: { type: String },
+    owner: String,
+    title: { type: String, required: true },
+    image: { type: String, required: true },
+    price: { type: Number, required: true },
+    qty: { type: Number, default: 1 },
+    uploader: { type: String },
+});
+const CartItem = mongoose.model('CartItem', cartItemSchema);
+
 app.post('/order', async (req, res) => {
     const {order, totalPrice} = req.body;
     const orderdetails = new Order(order);
