@@ -9,21 +9,24 @@ export default function Basket(props) {
   const { onAdd, onRemove, reRender, user } = props;
 
   const [cartItems, setCartItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getCartItems = async () => {
     try {
-      const { data } = await axios.post("http://localhost:5001/cart", {user})
-      return data
+      const { data } = await axios.post("http://localhost:5001/cart", { user });
+      return data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
   useEffect(() => {
     const fetchData = async () => {
-      if(user!==null){
+      if (user !== null) {
+        setIsLoading(true);
         const result = await getCartItems();
-        setCartItems(result)
+        setCartItems(result);
+        setIsLoading(false);
       }
     }
     fetchData()
@@ -45,24 +48,27 @@ export default function Basket(props) {
       <br></br>
 
       <div>
-        {cartItems.length === 0 && <div>Cart is empty</div>}
-        {cartItems.map((item) => (
-          <div key={item._id} className="row">
-            <div className="col-2 inline text-base text-violet-500">{item.title}</div>
-            <div className="col-2 text-base text-sky-400">
-              <button onClick={() => onRemove(item)} className="remove">
-                -
-              </button>{' '}
-              <button onClick={() => onAdd(item)} className="add">
-                +
-              </button>
+        {isLoading ? <p>Loading cart...</p> :
+
+          cartItems.map((item) => (
+            <div key={item._id} className="row">
+              <div className="col-2 inline text-base text-violet-500">{item.title}</div>
+              <div className="col-2 text-base text-sky-400">
+                <button onClick={() => onRemove(item)} className="remove">
+                  -
+                </button>{' '}
+                <button onClick={() => onAdd(item)} className="add">
+                  +
+                </button>
+              </div>
+              <div className="col-2 inline text-base text-rose-300" >{item.qty}</div>
+              <div className="col-2 text-right inline text-base text-green-300">
+                ₹{item.qty * item.price.toFixed(2)}
+              </div>
             </div>
-            <div className="col-2 inline text-base text-rose-300" >{item.qty}</div>
-            <div className="col-2 text-right inline text-base text-green-300">
-              ₹{item.qty * item.price.toFixed(2)}
-            </div>
-          </div>
-        ))}
+          ))
+
+        }
 
         <br></br>
 
