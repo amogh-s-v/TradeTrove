@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import DummyHeader from './DummyHeader';
 
 export default function checkout() {
 
@@ -58,14 +59,14 @@ export default function checkout() {
       history.push(url)
       window.location.reload();
     }
-    redirectMe('/orderhistory')
+    redirectMe('/orderHistory')
   }
 
-  
+  const url = "http://localhost:5003/order";
+
   const purchase = async (order) => {
     try {
-      console.log("placing order")
-      const { data } = await axios.post("http://localhost:5003/order", {order, totalPrice});
+      const { data } = await axios.post(url, {order, totalPrice});
       return data
     } catch (error) {
       console.log(error)
@@ -96,6 +97,7 @@ export default function checkout() {
 
   return (
     <section className="text-gray-400 bg-gray-900 body-font">
+      <DummyHeader></DummyHeader>
       <h1 className="sr-only">Checkout</h1>
 
       <div className="mx-auto grid max-w-screen-2xl grid-cols-1 md:grid-cols-2 ">

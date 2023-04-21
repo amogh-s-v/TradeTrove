@@ -1,2 +1,2 @@
 # TradeTrove
-test commit 3
+commit to test hello removal
