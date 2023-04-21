@@ -54,7 +54,7 @@ app.post("/register", (req, res) => {
 
 })
 
-const mongodb = "mongodb+srv://amoghsv:m9Niqwi33oTc9r1t@cluster0.cwqcvrn.mongodb.net/TradeTrove?retryWrites=true&w=majority";
+const mongodb = "mongodb+srv://username:password@cluster0.cwqcvrn.mongodb.net/TradeTrove?retryWrites=true&w=majority";
 const PORT = 5000;
 mongoose.connect(mongodb, {
     useNewUrlParser: true,
